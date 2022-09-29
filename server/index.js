@@ -1,8 +1,17 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config/dev');
+const FakeDb = require('./fake-db');
 
-mongoose.connect(config.DB_URI);
+
+const connectMongo = async () => {
+    mongoose.connect(config.DB_URI);
+
+    const fakeDb = await new FakeDb();
+    fakeDb.seedDb();
+}
+
+connectMongo();
 
 const app = express();
 
