@@ -19,16 +19,25 @@ class FakeDb {
         },
     ]};
 
+    async cleanDb() {
+        const deleteObject = await Player.deleteMany({});
+        return deleteObject
+    }
+
     pushPlayersToDb() {
         this.players.forEach((player) => {
             const newPlayer = new Player(player);
 
             newPlayer.save();
+            console.log('New Player saved');
         })
     }
 
     seedDb() {
-        this.pushPlayersToDb();
+        this.cleanDb().then((deleteResponse) => {
+            console.log(deleteResponse);
+            this.pushPlayersToDb();
+        });
     }
 }
 
