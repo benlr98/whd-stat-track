@@ -1,32 +1,25 @@
 import React from 'react';
+import Header from './shared/Header';
+import './scss/main.scss';
 
 
 function App() {
-
-  const player = {
-    firstname: 'Ben',
-    lastname: 'Rich',
-    Twos: 0,
-    Ones: 0,
-    dreb: 0,
-    oreb: 0,
-    to: 0,
-    stl: 0,
-    asst: 0,
-    blk: 0
-  }
-
-  const teams = {
-    home: 'Cheerios',
-    away: 'Cocoa Pebbles',
-  }
 
   const handleButtonClick = () => {
     //do something
   }
 
   return (
-    <div className="flex-row">
+      <Header />
+  );
+}
+
+export default App;
+
+
+/**
+ * 
+ * <div className="flex-row">
       <div className="flex-small">
         <div className="flex-row">
           <div className="flex-small">
@@ -55,9 +48,9 @@ function App() {
             <h3>8</h3>
           </div>
         </div>
-        <p>{player.firstname}</p>
-        <p>{player.firstname}</p>
-        <p>{player.firstname}</p>
+        <p>Ben</p>
+        <p>Ben</p>
+        <p>Ben</p>
       </div>
       <div className="flex-small">
         <div className="flex-row">
@@ -77,9 +70,5 @@ function App() {
           </div>
       </div>
     </div>
-  );
-}
-
-export default App;
-
+ */
 
