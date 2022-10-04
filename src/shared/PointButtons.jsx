@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
 const PointButtons = () => {
+    
     return (
         <Container>
             <Row>
