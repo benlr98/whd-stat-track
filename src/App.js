@@ -5,9 +5,9 @@ import './scss/main.scss';
 
 function App() {
 
-  const handleButtonClick = () => {
-    //do something
-  }
+  // const handleButtonClick = () => {
+  //   //do something
+  // }
 
   return (
     <div>
