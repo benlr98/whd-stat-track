@@ -6,13 +6,19 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 
-const StatButtons = () => {
+const StatButtons = (props) => {
+
+    const handleClick = (name, stat, tracking) => {
+        props.onStatButtonClick(name, stat, tracking);
+        console.log('stat button');
+    }
+
     return (
         <Container>
             <Row>
                 <Col>
                     <Stack gap={3}>
-                        <Button variant="primary">oreb</Button>
+                        <Button onClick={() => handleClick("Ben", "OREB", "4")} variant="primary">oreb</Button>
                         <Button variant="primary">to</Button>
                         <Button variant="primary">asst</Button>
                     </Stack>

@@ -18,19 +18,11 @@ const LiveStatList = (props) => { // props ==> an array of stat objects
     return <>{liveGameStatList}</>
 }
 
-const DisplayStats = () => {
-
-    const initialList = [{name: "MJ", stat: "DUNK", tracking: "4"}]
-
-    const [statList, setStatList] = useState(initialList);
-
-    const handleClick = () => {
-        console.log('test click');
-    }
+const DisplayStats = (props) => {
 
     return (
         <>
-            <button onClick={() => setStatList([{name: "testBen", stat: "2PT", tracking: "6"}, ...statList])}>Add stat</button>
+            {/* <button onClick={() => setStatList(handleClick)}>Add stat</button> */}
             <Row >
                 <Col className="h5">Cheerios</Col>
                 <Col>10</Col>
@@ -42,7 +34,7 @@ const DisplayStats = () => {
             <Container>
                 <h5 className="mt-4">Live Game Stats</h5>
                 <hr />
-                <LiveStatList gameStatList={statList}/>
+                <LiveStatList gameStatList={props.statList}/>
             </Container>
         </>
     )
