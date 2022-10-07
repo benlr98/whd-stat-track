@@ -1,32 +1,40 @@
 import React, { useState } from 'react';
+
+
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-const Example = () => {
+const StatButton = ({handleStatClick, buttonData}) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleClick = (playername, buttonData, team) => {
+    handleStatClick(playername, buttonData, team);
+    handleClose();
+  }
+
+
+
   return (
-    <div className="mt-2">
-      <Button variant="primary" onClick={handleShow}>
-       <FontAwesomeIcon icon={faBars} />
+    <>
+      <Button size="sm" variant={buttonData.primary ? "primary" : "danger"} onClick={handleShow}>
+       {buttonData.displayName}
       </Button>
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Players</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          <Button name="Ben" onClick={() => handleClick('Ben', buttonData, 'home')} size="sm">Ben</Button>
         </Offcanvas.Body>
       </Offcanvas>
-    </div>
+    </>
   );
 }
 
-export default Example;
+export default StatButton;
