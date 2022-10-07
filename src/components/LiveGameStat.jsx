@@ -6,10 +6,11 @@ import { solid} from '@fortawesome/fontawesome-svg-core/import.macro' // <-- imp
 
 const LiveGameStat = (props) => {
 
+
     return (
         <Row>
             <Col><span className="fw-semibold">{props.stat}</span> - {props.name} - ({props.tracking}) </Col>
-            <Col><Button size="sm" variant="danger"><FontAwesomeIcon icon={solid('x')} /></Button></Col>
+            <Col><Button onClick={() => props.handleRemoveStat(props.id, props.pointValue, props.team)} size="sm" variant="danger"><FontAwesomeIcon icon={solid('x')} /></Button></Col>
         </Row>
     )
 }

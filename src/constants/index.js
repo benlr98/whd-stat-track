@@ -51,5 +51,13 @@ export const BUTTONS = {
     blk: {id: 9, name: 'blk', displayName: 'BLOCK', primary: true},
     stl: {id: 10, name: 'stl', displayName: 'STEAL', primary: true},
     ast: {id: 11, name: 'ast', displayName: 'ASSIST', primary: true},
-  }
+  },
+  testButtons: [
+    {id: 6, name: 'oreb', displayName: 'OREB', primary: true},
+    {id: 7, name: 'dreb', displayName: 'DREB', primary: true},
+    {id: 8, name: 'to', displayName: 'TURNOVER', primary: true},
+    {id: 9, name: 'blk', displayName: 'BLOCK', primary: true},
+    {id: 10, name: 'stl', displayName: 'STEAL', primary: true},
+    {id: 11, name: 'ast', displayName: 'ASSIST', primary: true},
+  ]
 }

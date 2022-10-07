@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 
 import LiveGameStat from "./LiveGameStat";
 
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 
 // Build a list of live game stat components to feed to the display stat component
 const LiveStatList = (props) => { // props ==> an array of stat objects
     if (props.gameStatList){
         const liveGameStatList = props.gameStatList.map((statObject, index) => {
-            const { name, stat, tracking } = statObject;
+            const { id, name, stat, tracking, team, pointValue } = statObject;
     
             return (
-                <LiveGameStat key={index} name={name} stat={stat} tracking={tracking}/>
+                <LiveGameStat handleRemoveStat={props.handleRemoveStat} key={index} id={id} team={team} pointValue={pointValue} name={name} stat={stat} tracking={tracking}/>
             )
         })
         return liveGameStatList;
@@ -25,17 +25,16 @@ const LiveStatList = (props) => { // props ==> an array of stat objects
 
 const GameStats = (props) => {
 
-    // const [home, away] = props.gameDetails;
+    
+
 
 
     return (
         <>
-            {/* <button onClick={() => setStatList(handleClick)}>Add stat</button> */}
-            
             <Container>
                 <h5 className="mt-4">Live Game Stats</h5>
                 <hr />
-                <LiveStatList gameStatList={props.statList}/>
+                <LiveStatList handleRemoveStat={props.handleRemoveStat} gameStatList={props.statList}/>
             </Container>
         </>
     )
