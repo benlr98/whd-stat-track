@@ -8,14 +8,14 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-const StatButton = ({handleStatClick, buttonData}) => {
+const StatButton = ({handleAddStat, buttonData}) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleClick = (playername, buttonData, team) => {
-    handleStatClick(playername, buttonData, team);
+    handleAddStat(playername, buttonData, team);
     handleClose();
   }
 

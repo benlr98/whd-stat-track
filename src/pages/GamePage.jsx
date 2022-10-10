@@ -24,7 +24,7 @@ function GamePage() {
   const [playerStat, setPlayerStat] = [Constants.testInitialPlayerStats];
    */
 
-  const handleStatClick = (playername, buttonData, team) => {
+  const handleAddStat = (playername, buttonData, team) => {
     const point = buttonData.pointValue;
 
     setStatList(prevState => {
@@ -74,19 +74,19 @@ function GamePage() {
           <Container className='text-center'>
               <Row>
                 <Col sm={7}>
-                  <StatButton buttonData={Constants.BUTTONS.pointButtons.twoMade} handleStatClick={handleStatClick}/>
-                  <StatButton buttonData={Constants.BUTTONS.pointButtons.oneMade} handleStatClick={handleStatClick}/>
-                  <StatButton buttonData={Constants.BUTTONS.pointButtons.dunk} handleStatClick={handleStatClick}/>
+                  <StatButton buttonData={Constants.BUTTONS.pointButtons.twoMade} handleAddStat={handleAddStat}/>
+                  <StatButton buttonData={Constants.BUTTONS.pointButtons.oneMade} handleAddStat={handleAddStat}/>
+                  <StatButton buttonData={Constants.BUTTONS.pointButtons.dunk} handleAddStat={handleAddStat}/>
                 </Col>
                 <Col>
-                  <StatButton buttonData={Constants.BUTTONS.pointButtons.twoMiss} handleStatClick={handleStatClick}/>
-                  <StatButton buttonData={Constants.BUTTONS.pointButtons.oneMiss} handleStatClick={handleStatClick}/>
+                  <StatButton buttonData={Constants.BUTTONS.pointButtons.twoMiss} handleAddStat={handleAddStat}/>
+                  <StatButton buttonData={Constants.BUTTONS.pointButtons.oneMiss} handleAddStat={handleAddStat}/>
                 </Col>
               </Row>
               <Row className="p-4">
                 {Constants.BUTTONS.testButtons.map((button, index) => {
                   return (
-                    <Col key={index}><StatButton buttonData={button} handleStatClick={handleStatClick} /> </Col>
+                    <Col key={index}><StatButton buttonData={button} handleAddStat={handleAddStat} /> </Col>
                   )
                 })}
               </Row>
