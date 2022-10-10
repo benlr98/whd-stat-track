@@ -19,6 +19,15 @@ export const testInitialPlayerStats = {
   blk: 0,
 };
 
+export const testPlayers= [
+  {playername: "Ben Rich", stats: testInitialPlayerStats},
+  {playername: "Charlie Devaul", stats: testInitialPlayerStats},
+  {playername: "Willard Devaul", stats: testInitialPlayerStats},
+  {playername: "MJ", stats: testInitialPlayerStats},
+  {playername: "Bill Russel", stats: testInitialPlayerStats},
+  {playername: "Kobe", stats: testInitialPlayerStats},
+];
+
 export const testHomePlayers= [
   {playername: "Ben Rich", stats: testInitialPlayerStats},
   {playername: "Charlie Devaul", stats: testInitialPlayerStats},
