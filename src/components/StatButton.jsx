@@ -33,6 +33,7 @@ const StatButton = ({handleAddStat, buttonData}) => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Row>
+            {/* Loop over Home and Away players to create player selection buttons in Offcanvas popup */}
             <Col>
               <Stack gap={3}>
               {Constants.testHomePlayers.map((player, index) => {

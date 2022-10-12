@@ -19,7 +19,7 @@ export const testInitialPlayerStats = {
   blk: 0,
 };
 
-export const testPlayers= [
+export const testPlayers = [
   {playername: "Ben Rich", stats: testInitialPlayerStats},
   {playername: "Charlie Devaul", stats: testInitialPlayerStats},
   {playername: "Willard Devaul", stats: testInitialPlayerStats},
@@ -69,4 +69,44 @@ export const BUTTONS = {
     {id: 10, name: 'stl', displayName: 'STEAL', primary: true},
     {id: 11, name: 'ast', displayName: 'ASSIST', primary: true},
   ]
+}
+
+export const TEST_GAME = {
+  id: 1,
+  season: 2021,
+  start_time : '08:00',
+  date: '2022-12-2022',
+  competitors: { home: 'Cheerios', away: 'Lucky Charms'},
+  score: { home: 0, away: 0},
+  players: [ // [0, 6 , 16]
+    {
+      playerID: 1, 
+      hometeam: true,
+      firstname: 'Ben',
+      lastname: 'Rich',
+      nickname: 'Baby Shaq',
+      teamname: 'Cheerios',
+      height: { value: 72, unit: 'in' },
+      weight: { value: 150, unit: 'lbs' },
+    }
+  ],
+  playlist: [ // [0, 500]
+    {
+      playid: 1, 
+      away_score: 0, 
+      home_score: 0, 
+      team: 'Cheerios',
+      elapsed: '0:00:46',
+      playerid: 1,
+      points: 2,
+      type: 'shot',
+      result: 'made',
+      original_x: 50,
+      original_y: 50
+    },
+  ]
+}
+
+export const STAT_LIST = {
+  
 }

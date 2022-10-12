@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # PERSONAL
-/server/config/
+/server/config.env
+/server/models

@@ -11,16 +11,15 @@ import Col from 'react-bootstrap/Col';
 
 function GamePage() {
   
-  const initialStatList = []
-  const [statList, setStatList] = useState(initialStatList);
+  const [statList, setStatList] = useState([]);
   const [score, setScore] = useState({home: 0, away: 0});
+  const [players, setPlayers] = useState();
   
   /** 
    * Potential future states to create.
    **********************
   const [liveStat, setLiveStat] = useState();
   const [gameDetails, setGameDetails] = useState(initialGameDetails);
-  const [player, setPlayer] = useState();
   const [playerStat, setPlayerStat] = [Constants.testInitialPlayerStats];
    */
 
