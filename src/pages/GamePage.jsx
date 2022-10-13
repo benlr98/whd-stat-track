@@ -14,6 +14,8 @@ function GamePage() {
   const [statList, setStatList] = useState([]);
   const [score, setScore] = useState({home: 0, away: 0});
   const [players, setPlayers] = useState();
+
+
   
   /** 
    * Potential future states to create.

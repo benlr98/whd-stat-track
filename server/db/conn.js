@@ -9,19 +9,19 @@ let _db;
 
 module.exports = {
     getDb: function () {
-        console.log(_db);
         return _db;
     },
 
     connectToServer: async function() {
         try {
-            await client.connect();
-
-            await listDatabases(client);
+            const db = await client.connect();
+            if (db) {
+                _db = db.db('whd-app');
+                console.log(_db);
+                console.log('Successfully connected to MongoDB');
+            }
         } catch (e) {
             console.error(e);
-        } finally {
-            await client.close();
         }
     }
 };
