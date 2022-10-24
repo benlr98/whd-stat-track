@@ -78,16 +78,16 @@ export const TEST_GAME = {
   date: '2022-12-2022',
   competitors: { home: 'Cheerios', away: 'Lucky Charms'},
   score: { home: 0, away: 0},
+  statkeeper: "Real Ben",
   players: [ // [0, 6 , 16]
     {
-      playerID: 1, 
       hometeam: true,
       firstname: 'Ben',
       lastname: 'Rich',
       nickname: 'Baby Shaq',
       teamname: 'Cheerios',
-      height: { value: 72, unit: 'in' },
-      weight: { value: 150, unit: 'lbs' },
+      height: { value: 72, unit: 'in' }, // Take away for extended reference
+      weight: { value: 150, unit: 'lbs' }, // Take away for extended reference
     }
   ],
   playlist: [ // [0, 500]
