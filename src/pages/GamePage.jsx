@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -16,10 +16,10 @@ function GamePage() {
   
   const [statList, setStatList] = useState([]);
   const [score, setScore] = useState({home: 0, away: 0});
-  const [ teams, setTeams ] = useState({home: "loading", away: "loading"});
+  const [ teams, setTeams ] = useState({home: "", away: ""});
 
   //TODO: add functionality here from useeffect below
-  const [players, setPlayers] = useState();
+  const [players, setPlayers] = useState([]);
 
   const { gameId } = useParams();
 
@@ -32,39 +32,92 @@ function GamePage() {
         setTeams(data.competitors);
         setScore(data.score);
         setPlayers(data.players);
+        setStatList(data.playList);
       } catch (error) {
         console.log(error);
       }
     }
     fetchGame();
     
-  }, []);
+    
+  }, [gameId]);
 
 
-  
-  /** 
-   * Potential future states to create.
-   **********************
-  const [liveStat, setLiveStat] = useState();
-  const [gameDetails, setGameDetails] = useState(initialGameDetails);
-  const [playerStat, setPlayerStat] = [Constants.testInitialPlayerStats];
-   */
+  const addStat = async (player, buttonData) => {
+    let away_score = score.away;
+    let home_score = score.home;
 
-  const handleAddStat = (playername, buttonData, team) => {
+    if (player.teamname === teams.home) {
+      home_score += buttonData.pointValue
+    } else {
+      away_score += buttonData.pointValue
+    }
+
+    // Build stat object for PUT request
+    const data = {
+      away_score: away_score,
+      home_score: home_score,
+      team: player.teamname,
+      elapsed: 0,
+      playerId: player._id,
+      playerName: player.fullname,
+      points: buttonData.pointValue,
+      type: buttonData.name,
+      result: "NA",
+      original_x: 50,
+      original_y: 50
+    }
+
+    const url = `http://localhost:5000/api/games/addPlay/${gameId}`;
+    const settings = {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }
+      try {
+        const response = await fetch(url, settings);
+        const statData = await response.json();
+        return statData;
+        
+      } catch (error) {
+        console.log(error);
+      }
+
+  }
+
+  const removeStat = async (playId) => {
+    const data = { _id: playId }
+    const url = `http://localhost:5000/api/games/delete/${gameId}`;
+    const settings = {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }
+      try {
+        const response = await fetch(url, settings);
+        const statData = await response.json();
+        return statData;
+        
+      } catch (error) {
+        console.log(error);
+      }
+  }
+
+  const handleAddStat = (player, buttonData, team) => {
+
+    const statObject = addStat(player, buttonData);
+
     const point = buttonData.pointValue;
 
     setStatList(prevState => {
-      const length = prevState.length - 1;
-      const id = length >= 0 ? prevState[0].id + 1 : 1;
       return [
-        {
-          id: id, 
-          name: playername, 
-          stat: buttonData.displayName, 
-          tracking: 0, 
-          pointValue: point,
-          team: team,
-        },
+        statObject, 
          ...prevState
       ]
     })
@@ -77,8 +130,10 @@ function GamePage() {
   }
 
   const handleRemoveStat = (statId, pointValue, team) => {
+    removeStat(statId);
+
     setStatList(prevState => {
-      return [...prevState.filter((statObject) => statObject.id !== statId)]
+      return [...prevState.filter((statObject) => statObject._id !== statId)]
     })
 
     if (pointValue) {
@@ -100,19 +155,19 @@ function GamePage() {
           <Container className='text-center'>
               <Row>
                 <Col sm={7}>
-                  <StatButton players={players} buttonData={Constants.BUTTONS.pointButtons.twoMade} handleAddStat={handleAddStat}/>
-                  <StatButton players={players} buttonData={Constants.BUTTONS.pointButtons.oneMade} handleAddStat={handleAddStat}/>
-                  <StatButton players={players} buttonData={Constants.BUTTONS.pointButtons.dunk} handleAddStat={handleAddStat}/>
+                  <StatButton teams={teams} players={players} buttonData={Constants.BUTTONS.pointButtons.twoMade} handleAddStat={handleAddStat}/>
+                  <StatButton teams={teams} players={players} buttonData={Constants.BUTTONS.pointButtons.oneMade} handleAddStat={handleAddStat}/>
+                  <StatButton teams={teams} players={players} buttonData={Constants.BUTTONS.pointButtons.dunk} handleAddStat={handleAddStat}/>
                 </Col>
                 <Col>
-                  <StatButton players={players} buttonData={Constants.BUTTONS.pointButtons.twoMiss} handleAddStat={handleAddStat}/>
-                  <StatButton players={players} buttonData={Constants.BUTTONS.pointButtons.oneMiss} handleAddStat={handleAddStat}/>
+                  <StatButton teams={teams} players={players} buttonData={Constants.BUTTONS.pointButtons.twoMiss} handleAddStat={handleAddStat}/>
+                  <StatButton teams={teams} players={players} buttonData={Constants.BUTTONS.pointButtons.oneMiss} handleAddStat={handleAddStat}/>
                 </Col>
               </Row>
               <Row className="p-4">
                 {Constants.BUTTONS.testButtons.map((button, index) => {
                   return (
-                    <Col key={index}><StatButton players={players} buttonData={button} handleAddStat={handleAddStat} /> </Col>
+                    <Col key={index}><StatButton teams={teams} players={players} buttonData={button} handleAddStat={handleAddStat} /> </Col>
                   )
                 })}
               </Row>

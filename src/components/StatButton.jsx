@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import * as Constants from '../constants/index';
 
@@ -8,16 +8,24 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-const StatButton = ({handleAddStat, buttonData, players}) => {
+const StatButton = ({handleAddStat, buttonData, players, teams}) => {
   const [show, setShow] = useState(false);
+
+  const { home, away } = teams;
+  const homeplayers = players.filter((player) => player.teamname === home);
+  const awayplayers = players.filter((player) => player.teamname === away);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleClick = (playername, buttonData, team) => {
+
+    
     handleAddStat(playername, buttonData, team);
     handleClose();
   }
+
+  
 
 
 
@@ -36,25 +44,23 @@ const StatButton = ({handleAddStat, buttonData, players}) => {
             {/* Loop over Home and Away players to create player selection buttons in Offcanvas popup */}
             <Col>
               <Stack gap={3}>
-              {Constants.testHomePlayers.map((player, index) => {
+              {homeplayers.map((player, index) => {
                 return (
-                  <Button key={index} name={player.playername} onClick={() => handleClick(player.playername, buttonData, 'home')} size="sm">{player.playername}</Button>
+                  <Button key={index} name={player._id} onClick={() => handleClick(player, buttonData, 'home')} size="sm">{player.fullname}</Button>
                 )
               })}
               </Stack>
             </Col>
             <Col>
               <Stack gap={3}>
-              {Constants.testAwayPlayers.map((player, index) => {
+              {awayplayers.map((player, index) => {
                 return (
-                  <Button variant={'warning'} key={index} name={player.playername} onClick={() => handleClick(player.playername, buttonData, 'away')} size="sm">{player.playername}</Button>
+                  <Button variant={'warning'} key={index} name={player._id} onClick={() => handleClick(player, buttonData, 'away')} size="sm">{player.fullname}</Button>
                 )
               })}
               </Stack>
             </Col>
           </Row>
-          
-          {/* <Button name="Ben" onClick={() => handleClick('Ben', buttonData, 'home')} size="sm">Ben</Button> */}
         </Offcanvas.Body>
       </Offcanvas>
     </>

@@ -9,10 +9,10 @@ import { Container } from "react-bootstrap";
 const LiveStatList = (props) => { // props ==> an array of stat objects
     if (props.gameStatList){
         const liveGameStatList = props.gameStatList.map((statObject, index) => {
-            const { id, name, stat, tracking, team, pointValue } = statObject;
+            const { _id, playerName, type, tracking, team, points } = statObject;
     
             return (
-                <LiveGameStat handleRemoveStat={props.handleRemoveStat} key={index} id={id} team={team} pointValue={pointValue} name={name} stat={stat} tracking={tracking}/>
+                <LiveGameStat handleRemoveStat={props.handleRemoveStat} key={index} id={_id} team={team} pointValue={points} name={playerName} stat={type} tracking={tracking}/>
             )
         })
         return liveGameStatList;

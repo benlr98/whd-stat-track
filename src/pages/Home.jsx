@@ -12,13 +12,27 @@ const Home = () => {
   const [gameList, setGameList] = useState([]);
   const [teamList, setTeamList] = useState([]);
   const [playerList, setPlayerList] = useState([]);
+  
   const navigate = useNavigate();
 
+  // react-bootstrap Modal methods and state
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  // TODO: fetch games is duplicated in code at the moment
+  const fetchGames = async () => {
+    const url = "http://localhost:5000/api/games/getAll";
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setGameList(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // GET all game data
   useEffect(() => {
     const url = "http://localhost:5000/api/games/getAll";
     async function fetchGames() {
@@ -33,6 +47,7 @@ const Home = () => {
     fetchGames();
   }, []);
 
+  // GET all player data
   useEffect(() => {
     const url = "http://localhost:5000/api/players/getAll";
     async function fetchPlayers() {
@@ -47,6 +62,7 @@ const Home = () => {
     fetchPlayers();
   }, []);
 
+  // GET all teams 
   useEffect(() => {
     const url = "http://localhost:5000/api/players/getTeams";
     async function fetchTeams() {
@@ -61,15 +77,19 @@ const Home = () => {
     fetchTeams();
   }, []);
 
+  // Game click navigates to game page
   const handleClick = (game) => {
     navigate(`/game/${game._id}`)
   };
 
   const handleSubmit =  async (event) => {
     event.preventDefault();
+
+    // isolate variables to include in game POST object
     const hometeam = event.target.hometeam.value;
     const awayteam = event.target.awayteam.value;
     const statkeeper = event.target.statkeeper.value;
+    // To be filled with players from selected teams
     let players = [];
 
     // Add players to game if they are on one of the selected teams
@@ -107,18 +127,19 @@ const Home = () => {
     }
       try {
         const response = await fetch(url, settings);
-        console.log(response);
+        console.log(response.json());
+        
       } catch (error) {
         console.log(error);
       }
 
-      setGameList((state) => {
-        return [
-          ...state,
-          data
-        ]
-      })
+      /**
+       * Currently using this function because I need the _id attached to the gameList objects
+       * or else the game button click with error with url having no gameID param
+       *  */ 
+      fetchGames();
 
+      // close the opened modal
       handleClose();
   }
 
